@@ -1,0 +1,73 @@
+// Problem name: Data Structures Exam (A)
+// Problem link: https://codeforces.com/gym/101401/problem/H
+// Submission link: https://codeforces.com/gym/101401/submission/43704752
+
+#include <bits/stdc++.h>
+#include<ext/pb_ds/assoc_container.hpp>
+#include<ext/pb_ds/tree_policy.hpp>
+
+using namespace std;
+
+using namespace __gnu_pbds;
+template <typename T>
+using ordered_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
+//ordered_set<int>  s;
+//cout << s.order_of_key(2) << endl; // the number of elements in the s less than 2
+//cout << *s.find_by_order(0) << endl; // print the 0-th smallest number in s(0-based)
+
+#define DB( x ) cout << #x << " = " << x << endl;
+#define LEFT(n) (2 * (n))
+#define RIGHT(n) (2 * (n) + 1)
+
+typedef long long ll;
+typedef unsigned long long ull;
+typedef pair<ll, ll> pii;
+typedef pair<pii, int> piii;
+typedef pair<pii, pii> piiii;
+typedef pair<double, double> point;
+
+const ll INF = 1e16;
+const double EPS = 1e-6;
+const ll MOD = (ll)(1000000007 );
+const ll MAXV = (ll)(2e5 + 5);
+const ll MAXE = (ll)(4e4 + 5);
+const ll MAXLOG = (ll)(20);
+
+int idx[MAXV];
+int table[MAXV];
+
+int main(){
+	cin.sync_with_stdio( 0 );cin.tie( 0 );
+
+	int n, m;
+
+	cin >> n >> m;
+
+	for(int i = 0;i < n;i ++){
+		int num;
+		cin >> num;
+		idx[num] = i;
+	}
+
+
+	int ans = 0;
+	for(int i = 0; i < m;i ++){
+		int a, b;
+		cin >> a >> b;
+
+		int idx_a = idx[a];
+		int idx_b = idx[b];
+		if(idx_a > idx_b)
+			swap(idx_a, idx_b);
+
+		int dif1 = idx_a - idx_b - 1;
+		int dif2 = n - 2 - dif1;
+
+		if(dif1 % 2 != 0 || dif2 % 2 != 0)
+			ans ++;
+	}
+
+
+	cout << ans << "\n";
+	return 0;
+}
