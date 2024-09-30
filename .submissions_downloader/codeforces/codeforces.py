@@ -173,9 +173,13 @@ def save_submissions(output_path, handle, count = 1000, *, filter_ = lambda s: T
 
 	submissions = get_user_submissions(handle, count, filter_ = filter_, max_ = max_)
 	output_path.mkdir(parents = True, exist_ok = True)
+	folder = {
+		4: "Contests",
+		6: "Gym"
+	}
 	for dname, sub_ in normalize(submissions):
 		s = list(sub_)
-		_save_submissions(output_path / s[ 0 ].contest_id, s)
+		_save_submissions(output_path / folder[ len(s[ 0 ].contest_id) ] / s[ 0 ].contest_id, s)
 
 if __name__ == "__main__":
 	count = 1000
